@@ -7,22 +7,22 @@ from saucedemopages.inventory_page import InventoryPage
 
 
 class PageFactory:
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self, page):
+        self.page = page
 
     def get_page_instance(self, page_name):
         if page_name == 'index_page':
-            return IndexPage(self.driver)
+            return IndexPage(self.page)
         elif page_name == 'inventory_page':
-            return InventoryPage(self.driver)
+            return InventoryPage(self.page)
         elif page_name == 'cart_page':
-            return CartPage(self.driver)
+            return CartPage(self.page)
         elif page_name == 'check_out_step_one_page':
-            return CheckoutStepOnePage(self.driver)
+            return CheckoutStepOnePage(self.page)
         elif page_name == 'check_out_step_two_page':
-            return CheckoutStepTwoPage(self.driver)
+            return CheckoutStepTwoPage(self.page)
         elif page_name == 'check_out_step_complete_page':
-            return CheckoutCompletePage(self.driver)
+            return CheckoutCompletePage(self.page)
         else:
             raise f"Unable to create the instance of: {page_name})"
 

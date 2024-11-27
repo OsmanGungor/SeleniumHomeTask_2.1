@@ -1,5 +1,5 @@
 from collections import namedtuple
 
-TIMEOUT = 10
+TIMEOUT = 10000
 CUSTOMER = namedtuple('Customer', ['name', 'lastname', 'postalcode'])
-TEST_CUSTOMER = CUSTOMER('Osman', 'Gungor', 38010)
+TEST_CUSTOMER = CUSTOMER('Osman', 'Gungor', '38010')

@@ -1,7 +1,6 @@
 from collections import Counter
 import pytest
 
-
 @pytest.mark.parametrize("item",
                          [["Test.allTheThings() T-Shirt (Red)", "Sauce Labs Onesie"], ["Sauce Labs Bolt T-Shirt"]])
 def test_add_to_cart(login_user, item):

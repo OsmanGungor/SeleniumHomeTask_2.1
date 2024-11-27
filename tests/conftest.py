@@ -1,18 +1,19 @@
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
+from playwright.sync_api import sync_playwright
 from saucedemopages.pagefactory import PageFactory
 
 
 @pytest.fixture(scope="function")
 def create_page_factory():
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-    driver.implicitly_wait(10)
-    driver.maximize_window()
-    page_factory = PageFactory(driver)
-    yield page_factory
-    driver.quit()
+    playwright = sync_playwright().start()
+    browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context()
+    _page = context.new_page()
+    yield PageFactory(_page)
+    _page.close()
+    context.close()
+    browser.close()
+    playwright.stop()
 
 
 @pytest.fixture(scope="function")

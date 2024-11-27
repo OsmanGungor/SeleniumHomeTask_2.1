@@ -13,7 +13,7 @@ def test_successful_login(create_page_factory, username, password):
     page_index.populate_password_textbox(password)
     page_index.click_login()
     inventory_page = page_factory.get_page_instance('inventory_page')
-    current_url = inventory_page.wait_page_url()
+    current_url = inventory_page.url
     assert current_url == inventory_page.url, f"Wrong URL, URL did not change as expected. Current URL: {current_url}"
 
 

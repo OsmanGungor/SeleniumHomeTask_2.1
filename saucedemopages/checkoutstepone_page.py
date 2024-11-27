@@ -1,27 +1,34 @@
-from selenium.webdriver.common.by import By
 from saucedemopages.base_page import BasePage
 from constants import TEST_CUSTOMER
 
 
 class CheckoutStepOnePage(BasePage):
-    def __init__(self, driver):
-        super().__init__('checkout-step-one.html', driver)
-        self.firstname_box_locator = (By.ID, 'first-name')
-        self.lastname_box_locator = (By.ID, 'last-name')
-        self.postalcode_box_locator = (By.ID, 'postal-code')
-        self.continue_button_locator = (By.ID, 'continue')
+    def __init__(self, page):
+        super().__init__('checkout-step-one.html', page)
+        self.firstname_box_locator = '#first-name'
+        self.lastname_box_locator = '#last-name'
+        self.postalcode_box_locator = '#postal-code'
+        self.continue_button_locator = '#continue'
 
     def fill_firstname(self):
-        super().send_keys(self.firstname_box_locator, TEST_CUSTOMER.name)
+        self.page.fill(self.firstname_box_locator, TEST_CUSTOMER.name)
+        self.logger.info("Firstname textbox filled")
+
 
     def fill_lastname(self):
-        super().send_keys(self.lastname_box_locator, TEST_CUSTOMER.lastname)
+        self.page.fill(self.lastname_box_locator, TEST_CUSTOMER.lastname)
+        self.logger.info("Surname textbox filled")
+
 
     def fill_postalcode(self):
-        super().send_keys(self.postalcode_box_locator, TEST_CUSTOMER.postalcode)
+        self.page.fill(self.postalcode_box_locator, TEST_CUSTOMER.postalcode)
+        self.logger.info("Postalcode textbox filled")
+
 
     def click_continue(self):
-        super().js_scroll_and_js_click(self.continue_button_locator)
+        self.page.locator(self.continue_button_locator).click()
+        self.logger.info("Continue button clicked.")
+
 
     def populate_checkout_information(self):
         self.fill_firstname()
